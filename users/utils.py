@@ -5,7 +5,6 @@ from six import text_type
 from django.conf import settings
 from django.urls import reverse
 from django.core.mail import send_mail
-from django.core.mail import EmailMessage
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.sites.shortcuts import get_current_site
@@ -30,13 +29,6 @@ token_generator = AppTokenGenerator()
 def delete_atomic_object(obj):
     if hasattr(obj, "delete"):
         getattr(obj, "delete")()
-
-
-class Util:
-    @staticmethod
-    def send_email(data):
-        email = EmailMessage(subject=data['email_subject'], body=data['email_body'], to=[data['to_email']])
-        email.send()
 
 
 def get_header(request):

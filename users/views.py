@@ -18,10 +18,11 @@ from rest_framework import generics, permissions, status
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.parsers import FileUploadParser, JSONParser, MultiPartParser, FormParser
 
+import users.tasks as user_tasks
 import users.utils as users_utils
 import users.models as users_models
-import users.serializers as users_serializers
 import users.filters as users_filters
+import users.serializers as users_serializers
 
 
 class UsersAdminView(users_utils.ViewSerializerMixin, users_utils.ViewMixin):
@@ -97,7 +98,7 @@ class RegisterView(generics.GenericAPIView):
                     'to_email': user.email,
                     }
 
-            users_utils.Util.send_email(data)
+            user_tasks.send_email.delay(data)
             return Response({'success': True, "message": "Please check your email to verify account"},
                             status=status.HTTP_201_CREATED)
         except Exception as e:
@@ -184,7 +185,7 @@ class RequestPasswordResetEmailView(generics.GenericAPIView):
                         'to_email': user.email,
                         }
 
-                users_utils.Util.send_email(data)
+                user_tasks.send_email.delay(data)
                 return Response({'success': True, 'message': 'We have sent you a link to reset your password'},
                                 status=status.HTTP_200_OK)
         except Exception as e:

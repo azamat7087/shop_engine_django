@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'users',
+    'redis',
+    'celery',
     "rest_framework",
     'phonenumbers',
     'phonenumber_field',
@@ -116,7 +118,14 @@ CORS_ALLOWED_ORIGINS = [
     'http://10.22.22.11:3000',
 ]
 CORS_ALLOW_CREDENTIALS = True
-
+CORS_ALLOW_METHODS = (
+    'GET',
+    'POST',
+    'PATCH',
+    'PUT',
+    'DELETE',
+    'OPTIONS'
+)
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -190,11 +199,11 @@ SWAGGER_SETTINGS = {
 }
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ.get('EMAIL', '')
+EMAIL_HOST_USER = os.environ.get('EMAIL', 'azaza7087@gmail.com')
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.environ.get('EMAIL', '')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL', 'azaza7087@gmail.com')
 EMAIL_PORT = 587
-EMAIL_HOST_PASSWORD = os.environ.get('PASSWORD', '')
+EMAIL_HOST_PASSWORD = os.environ.get('PASSWORD', 'kvoffuoadnnxjrbp')
 
 AUTH_USER_MODEL = 'users.Users'
 
@@ -207,3 +216,16 @@ REST_FRAMEWORK["DEFAULT_PERMISSION_CLASSES"] = ["rest_framework.permissions.Allo
 REST_FRAMEWORK['DEFAULT_PAGINATION_CLASS'] = 'rest_framework.pagination.PageNumberPagination'
 REST_FRAMEWORK['PAGE_SIZE'] = 20
 REST_FRAMEWORK['NON_FIELD_ERRORS'] = 'error'
+
+
+# Redis_config
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+
+# Celery_config'
+CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + str(REDIS_PORT) + '/0'
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + str(REDIS_PORT) + '/0'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
