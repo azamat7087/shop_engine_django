@@ -190,11 +190,11 @@ SWAGGER_SETTINGS = {
 }
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ.get('EMAIL', 'azaza7087@gmail.com')
+EMAIL_HOST_USER = os.environ.get('EMAIL', '')
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.environ.get('EMAIL', 'azaza7087@gmail.com')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL', '')
 EMAIL_PORT = 587
-EMAIL_HOST_PASSWORD = os.environ.get('PASSWORD', 'kvoffuoadnnxjrbp')
+EMAIL_HOST_PASSWORD = os.environ.get('PASSWORD', '')
 
 AUTH_USER_MODEL = 'users.Users'
 
