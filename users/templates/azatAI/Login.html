@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+<body>
+    <form action="{% url 'log_user_url' %}"  method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+
+        {{ form_log.non_field_errors }}
+        {% if verif %}
+                <h2>Please, activate your account. Check your email!</h2>
+            {% endif %}
+        {% for field in form_log %}
+
+            <div class="form-group">
+
+            {{ field.label }}
+            {{ field }}
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+        {% endfor %}
+
+        <p>
+            <button type="submit" name="button" class="btn btn-primary"> Login! </button>
+        </p>
+
+        <p>
+            <a href="{% url 'recovery_url' %}">Forgot your password?</a>
+        </p>
+
+    </form>
+
+</body>
+</html>

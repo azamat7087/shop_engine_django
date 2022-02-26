@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% if phone_not_unique %}
+    <h3>This phone number is already in system</h3>
+{% endif %}
+<form action="{% url 'registration_user_url' %}"  method="post" enctype='multipart/form-data'>
+ {% csrf_token %}
+        {{ form.id }}
+        {% for field in form %}
+            <div class="form-group">
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+
+            {{ field.label }}
+            {{ field }}
+
+            </div>
+
+        {% endfor %}
+   <button type="submit" name="Reg_btn" class="btn btn-primary" value="Registration"> Create! </button>
+
+
+    </form>
+</body>
+</html>

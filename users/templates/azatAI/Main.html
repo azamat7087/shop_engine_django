@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Main</title>
+</head>
+<body>
+     Users:
+     <table border="2">
+        <td>id</td> <td>phone number</td> <td>email</td>
+         {% for user in users %}
+              <tr>
+                <td>{{ user.id }}</td><td>{{ user.phone_number }}</td> <td> {{ user.email }} </td>
+              </tr>
+         {% endfor %}
+     </table>
+
+    <p>
+       Current USER: {{ request.user}}
+    </p>
+
+     <p>
+       USER PHONE_NUMBER:  {{ request.user.phone_number }}
+    </p>
+
+    <p>
+       OS:   {{ device.device_os }}
+    </p>
+
+     <p>
+         IP ADDRESS: {{ device.ip }}
+     </p>
+
+    <p>
+        HTTP header: {{ header }}
+    </p>
+
+    <p>
+        DEVICE ID: {{ device.device_id }}
+    </p>
+{#    <p>#}
+{#        Applications:#}
+{#          <table border="2">#}
+{#        <td>App_ID</td> <td>App_secret</td> <td>Level of API</td> <td>Name of App</td>#}
+{#              {% for app in apps %}#}
+{#                  <tr>#}
+{#                    <td>{{ app.app_id }}</td><td>{{ app.app_secret }}</td> <td> {{ app.api_level }} </td><td> {{ app.name }} </td>#}
+{#                  </tr>#}
+{#            {% endfor %}#}
+{#     </table>#}
+{##}
+{##}
+{#    </p>#}
+
+</body>
+</html>
+
